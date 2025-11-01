@@ -104,3 +104,16 @@ This starter prioritizes:
 - **No build process** required
 
 Built for internal tools, admin panels, and microservices - not public-facing marketing sites.
+
+## Security Features
+
+- All routes protected behind authentication by default
+- Google reCAPTCHA v3 on login (invisible, score-based)
+- Password reset functionality included
+- Email verification ready (if needed)
+
+### Adding Two-Factor Authentication
+
+This starter doesn't include 2FA by default (YAGNI principle). When you need it:
+- For email/SMS codes: Consider [Laravel Fortify](https://laravel.com/docs/fortify)
+- For TOTP (Google Authenticator): Consider [pragmarx/google2fa-laravel](https://github.com/antonioribeiro/google2fa)

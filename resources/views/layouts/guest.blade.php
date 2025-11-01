@@ -17,6 +17,9 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 
+        <!-- Google reCAPTCHA v3 -->
+        <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
@@ -30,5 +33,8 @@
                 {{ $slot }}
             </div>
         </div>
+
+        </div>
+        @stack('scripts')
     </body>
 </html>

@@ -31,6 +31,8 @@
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
+        <!-- reCAPTCHA v3 -->
+        <x-input-error :messages="$errors->get('recaptcha_token')" class="mt-2" />
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
@@ -44,4 +46,31 @@
             </x-primary-button>
         </div>
     </form>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.querySelector('form');
+
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', {action: 'login'})
+                            .then(function(token) {
+                                // Add token to form
+                                const input = document.createElement('input');
+                                input.type = 'hidden';
+                                input.name = 'recaptcha_token';
+                                input.value = token;
+                                form.appendChild(input);
+
+                                // Submit form
+                                form.submit();
+                            });
+                    });
+                });
+            });
+        </script>
+    @endpush
 </x-guest-layout>
